@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+		<PackageReference Include="XuanYuan.Net.Utilities" Version="2.4.0" />
 	</ItemGroup>
 
 </Project>
