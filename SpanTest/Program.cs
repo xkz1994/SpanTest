@@ -1,6 +1,6 @@
-﻿// BenchmarkRunner.Run<Test>();
+﻿using SpanTest;
+
+ReturnRefTest.Test();
+// RefAndInTest.Test();
+// BenchmarkRunner.Run<Test>();
 // SpanTest.SpanTest.Test();
-
-using SpanTest;
-
-RefAndInTest.Test();
