@@ -10,7 +10,7 @@ public static class ReturnRefTest
         // 等价于 int[,] array = new int[2, 3];
         Print2DArray(ref array);
         /*
-         * 0     0       0
+         * 0       0       0
          * 0       0       0
         */
 
@@ -19,10 +19,19 @@ public static class ReturnRefTest
         tmp = 999;
         Print2DArray(ref array);
         /*
-         * 0     0       0
+         * 0       0       0
          * 0       0       0
         */
 
+        Console.WriteLine("------ref readonly var ok1 = ref FindReadonly(array, s => s >= 0) 返回的指针不能修改 ------");
+        // ref var ok1 = ref FindReadonly(array, s => s >= 0); // error 必须加readonly
+        ref readonly var ok1 = ref FindReadonly(array, s => s >= 0);
+        // ok1 = 999; // error 不能修改
+        Print2DArray(ref array);
+        /*
+         * 0       0       0
+         * 0       0       0
+        */
 
         Console.WriteLine("------ref var ok = ref Find(array, s => s >= 0) 生效------");
         ref var ok = ref Find(array, s => s >= 0);
@@ -48,6 +57,26 @@ public static class ReturnRefTest
     /// 返回int指针(ref int类型相当于获取当前int的指针可以用于修改)
     /// </summary>
     public static ref int Find(int[,] matrix, Func<int, bool> predicate)
+    {
+        for (var i = 0; i < matrix.GetLength(0); i++)
+        {
+            for (var j = 0; j < matrix.GetLength(1); j++)
+            {
+                if (predicate(matrix[i, j]))
+                {
+                    return ref matrix[i, j];
+                }
+            }
+        }
+
+        throw new InvalidOperationException("Not found");
+    }
+
+
+    /// <summary>
+    /// 返回int指针(ref int类型相当于获取当前int的指针可以用于修改)
+    /// </summary>
+    public static ref readonly int FindReadonly(int[,] matrix, Func<int, bool> predicate)
     {
         for (var i = 0; i < matrix.GetLength(0); i++)
         {

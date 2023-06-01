@@ -65,5 +65,5 @@
 - `out`指定此参数由引用传递，由调用方法`写入`
 	- `Try+`方法非常常见(`int.Try`, `float.Try`)
 	- `JsonElement j = JsonDocument.Parse("").RootElement;` `j.TryGetDateTime, j.TryGetUInt16 ...`
-- 此外还有`return ref`见`ReturnRefTest.cs`表示返回指针类似于C++中`int&`，`ref struct`等
+- 此外还有`return ref` `ref readonly`见`ReturnRefTest.cs`表示返回指针类似于C++中`int&`，`ref struct`等
 - 并且不能跨`await`或`yield`使用
